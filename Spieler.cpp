@@ -158,7 +158,7 @@ int Spieler::ZufaelligerAusLager() // Prueft, welche Spielfiguren im Lager stehe
     std::vector<int> tempVec;
     for (unsigned int i = 0; i < aktuellesFeld.max_size(); i++) // Geht die Positionen der 4 Spielfiguren eines Spielers durch.
     {
-        if ((aktuellesFeld.at(i)) == (Lager)) // Checkt ob die Spielfigur auf dem Startfeld des jeweiligen Spielers steht.
+        if (FigurImLager(i)) // Checkt ob die Spielfigur sich im Lager befindet
         {
             tempVec.push_back(i); // Fuegt den Index der Startfeldfiguren in ein Veektor ein.
         }
@@ -171,16 +171,54 @@ int Spieler::ZufaelligerAusFeld() // Prueft, welche Spielfiguren auf dem Spielfe
     std::vector<int> tempVec;
     for (unsigned int i = 0; i < aktuellesFeld.max_size(); i++) // Geht die Positionen der 4 Spielfiguren eines Spielers durch.
     {
-        if ((aktuellesFeld.at(i)) != (Lager)) // Überprüft ob die Figur an Index i gleich ist mit dem Lager (i durchlaufen)
+        if (!FigurImLager(i) && FigurImZiel(i)) // Überprüft ob die Figur an Index i nicht im Lager und nicht im Ziel ist (also im Spielfeld ist)
         {
-            for (int j = 0; i < Zielfelder.max_size(); j++)
-            {
-                if (aktuellesFeld.at(i) != Zielfelder.at(j)) // Überprüft ob die Figur an Index i gleich ist mit den Zielfeldern (index j durchlaufen).
-                {
-                    tempVec.push_back(i); // Wenn die Figur weder gleich mit dem Lager ist noch gleich mit einem Zielfeld ist, wird Sie an den Vektor angefuegt.
-                }
-            }
+            tempVec.push_back(i);
         }
     }
     return tempVec.at((Zufall::Zufallsgenerator(tempVec.size())) - 1); // Die Groesse des Vektors wird als obere Grenze für eine Zufallsgenerator startend bei 1 benutzt, welche durch "-1" als Index des aktuellesFeld-Arrays dient
+}
+
+bool Spieler::MindestensEineImLager() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+{
+    for (int i = 0; i < aktuellesFeld.max_size(); i++)
+    {
+        if (FigurImLager(i))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Spieler::MindestensEineImSpielfeld() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+{
+    for (int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
+    {
+        if (!(FigurImZiel(i)) && !(FigurImLager(i))) // Ist Figur nicht im Ziel und nicht im Lager
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Spieler::MindestensEineImZiel() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+{
+    for (int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
+    {
+        if (!(FigurAufSpielfeld(i)) && !(FigurImLager(i))) // Ist Figur nicht im Ziel und nicht im Lager
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int Spieler::FigurAussuchen()
+{
+    std::cout << "Wähle FigurIndex: ";
+    int FigurIndex;
+    std::cin >> FigurIndex; //Spieler wählt Index
+    return FigurIndex;
 }

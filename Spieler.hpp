@@ -38,8 +38,10 @@ public:
 
     // Aktionen des Figuren
     int Wuerfeln();
+    int FigurAussuchen();
     int ZufaelligerAusLager();
     int ZufaelligerAusFeld();
+
 
     // Abfragen der Figuren
     bool FigurImLager(int);      // Überprüft, ob eine Figur am jeweiligen Index im Lager ist.
@@ -49,4 +51,8 @@ public:
     bool AlleFigurenImLager();      // Überprüft, ob alle Spielfiguren im Lager sind
     bool AlleFigurenAufSpielfeld(); // Überprüft, ob alle Spielfiguren auf dem Spielfeld sind
     bool AlleFigurenImZiel();       // Überprüft, ob alle Spielfiguren im Ziel sind
+
+    bool MindestensEineImLager(); //Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+    bool MindestensEineImSpielfeld(); //Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+    bool MindestensEineImZiel();
 };
