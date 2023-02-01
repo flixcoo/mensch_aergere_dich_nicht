@@ -1,0 +1,19 @@
+/**
+ * \brief Kurzbeschreibung der Klasse
+ *
+ *
+ * AusfÅhrliche Beschreibung der FunktionalitÑt
+ * der Klasse und allem, was dazu gehîrt.
+ *
+ * @author Autor der Klasse
+ * @see Verweis auf andere Klasse, die im Bezug steht.
+ */
+
+#include <random>
+#include <iostream>
+
+class Zufall
+{
+public:
+    static int Zufallsgenerator(int);
+};
