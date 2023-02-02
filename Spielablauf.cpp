@@ -7,80 +7,120 @@
 #include "Spielfeld.hpp"
 #include "Spielablauf.hpp"
 
-void Spielablauf::EineRunde(Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Jeder Spieler ist einmal am Zug
+void Spielablauf::EineRunde(Spieler &SpielerObj1, Spieler &SpielerObj2, Spieler &SpielerObj3, Spieler &SpielerObj4, Spielfeld &SpielfeldObj) // Jeder Spieler ist einmal am Zug
 {
-    int Wuerfelzahl = SpielerObj1.Wuerfeln();
+    std::cout << "[EineRunde]: Spieler 1 ist an der Reihe, bitte bestaetige mit einer Taste." << std::endl;
+    std::cin.ignore();
+    
+    int Wuerfelzahl;
+    
+    Wuerfelzahl = SpielerObj1.Wuerfeln();
     Spielzug(Wuerfelzahl, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj); // Runde von Spieler 1
 
-    int Wuerfelzahl = SpielerObj2.Wuerfeln();
+    std::cout << "[EineRunde]: Dein Zug ist beendet, Spieler 2 bestaetige mit einer Taste." << std::endl;
+    std::cin.ignore();
+
+    Wuerfelzahl = SpielerObj2.Wuerfeln();
     Spielzug(Wuerfelzahl, SpielerObj2, SpielerObj3, SpielerObj4, SpielerObj1, SpielfeldObj); // Runde von Spieler 2
 
-    int Wuerfelzahl = SpielerObj3.Wuerfeln();
+    std::cout << "[EineRunde]: Dein Zug ist beendet, Spieler 3 bestaetige mit einer Taste." << std::endl;
+    std::cin.ignore();
+
+    Wuerfelzahl = SpielerObj3.Wuerfeln();
     Spielzug(Wuerfelzahl, SpielerObj3, SpielerObj4, SpielerObj1, SpielerObj2, SpielfeldObj); // Runde von Spieler 3
 
-    int Wuerfelzahl = SpielerObj4.Wuerfeln();
+    std::cout << "[EineRunde]: Dein Zug ist beendet, Spieler 4 bestaetige mit einer Taste." << std::endl;
+    std::cin.ignore();
+
+    Wuerfelzahl = SpielerObj4.Wuerfeln();
     Spielzug(Wuerfelzahl, SpielerObj4, SpielerObj1, SpielerObj2, SpielerObj3, SpielfeldObj); // Runde von Spieler 4
 }
 
-void Spielablauf::Spielzug(int Wuerfelzahl, Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Zug fuer jeweils einen Spieler und seine Gegner
+void Spielablauf::Spielzug(int Wuerfelzahl, Spieler &SpielerObj1, Spieler &SpielerObj2, Spieler &SpielerObj3, Spieler &SpielerObj4, Spielfeld &SpielfeldObj) // Zug fuer jeweils einen Spieler und seine Gegner
 {
     
     if (Wuerfelzahl == 6) // 6 Gewuerfelt
     {
-        std::cout << "Wuerfelzahl: 6" << std::endl;
+        std::cout << "[Spielzug]: Du hast eine 6 gewuerfelt! nice" << std::endl;
+        std::cin.ignore();
         if (SpielerObj1.MindestensEineImLager()) // 6 gewuerfelt && alle sind im Lager
         {
-            std::cout << "Es ist mindestens eine Figur im Lager." << std::endl;
+            std::cout << "[Spielzug]: Es ist mindestens eine Figur im Lager." << std::endl;
+            std::cin.ignore();
             int FigurIndex = SpielerObj1.ZufaelligerAusLager();
+            FigurBewegen(Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
+
+            std::cout << "[Spielzug]: Du hast eine 6 gewuerfelt und darfst deshalb nochmal wuerfeln" << std::endl;
+            std::cin.ignore();
+            int Wuerfelzahl = SpielerObj1.Wuerfeln();
+            std::cout << "[FigurBewegen]: Du hast eine " << Wuerfelzahl << " gewuerfelt" << std::endl;
+            std::cin.ignore();
             FigurBewegen(Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
         }
         else // 6 Gewuerfelt && keiner ist im Lager
         {
-            std::cout << "Es ist keine Figur im Lager." << std::endl;
+            std::cout << "[Spielzug]: Es ist keine Figur im Lager." << std::endl;
+            std::cin.ignore();
             if(FigurenBewegbar(Wuerfelzahl, SpielerObj1, SpielfeldObj))
             {
-                std::cout << "Es ist ist mindestens eine Figur bewegbar." << std::endl << std::endl;
+                std::cout << "[Spielzug]: Es ist ist mindestens eine Figur bewegbar." << std::endl << std::endl;
+                std::cin.ignore();
                 int FigurIndex = SpielerObj1.FigurAussuchen();
                 FigurBewegen(Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
+                
+                std::cout << "[Spielzug]: Du hast eine 6 gewuerfelt und darfst deshalb nochmal wuerfeln" << std::endl;
+                int Wuerfelzahl = SpielerObj1.Wuerfeln();
+                std::cin.ignore();
+                FigurBewegen(Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
             }
-            else
-            {
-                std::cout << "Es ist keine Figur bewegbar" << std::endl << std::endl;
-                return;
-            }
-            
+            std::cout << "[Spielzug]: Das ist net so geil jetzt." << std::endl;
+
         }
     }
     else if (SpielerObj1.AlleFigurenImLager()) // Keine 6 gewuerfelt & alle sind im Lager
     {
-        std::cout << "Wuerfelzahl: " << Wuerfelzahl << std::endl;
-        std::cout << "Alle deiner Figuren sind noch im Lager." << std::endl;
-        int Versuche = 2;
-        for (int i = 0; i >= Versuche; i++)
+        std::cout << "[Spielzug]: Du hast eine " << Wuerfelzahl << " gewuerfelt! ist oke nech" << std::endl;
+        std::cin.ignore();
+        std::cout << "[Spielzug]: Alle deiner Figuren sind noch im Lager." << std::endl;
+        std::cin.ignore();
+        std::cout << "[Spielzug]: Da du keine 6 gewuerfelt hast und alle deiner Spieler noch im Lager sind, darfst du noch 2 mal wuerfeln." << std::endl;
+        std::cin.ignore();
+        for (int i = 2; i > 0; i--)
         {
-            std::cout << "Da du keine 6 gewuerfelt hast, darfst du noch " << Versuche << " mal wuerfeln." << std::endl;
             int Wuerfelzahl = SpielerObj1.Wuerfeln();
             if (Wuerfelzahl == 6)
             {
-                std::cout << "Du hast jetzt endlich eine "<< Wuerfelzahl << " gewuerfelt" << std::endl;
+                std::cout << "[Spielzug]: Du hast jetzt eine "<< Wuerfelzahl << " gewuerfelt" << std::endl;
+                std::cin.ignore();
                 Spielzug(6, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
-                std::cout << "[system]: break" << std::endl << std::endl;
+                std::cout << "[Spielzug]: break" << std::endl << std::endl;
+                std::cin.ignore();
                 break;
+            }
+            else
+            {
+                std::cout << "[Spielzug]: Du hast eine " << Wuerfelzahl << " gewuerfelt. Du brauchst jedoch eine 6." << std::endl;
+                std::cin.ignore();
+                std::cout << "[Spielzug]: Weitere Versuche: " << i-1 << std::endl;
+                std::cin.ignore();
             }
         }
     }
     else if (SpielerObj1.MindestensEineImSpielfeld() || SpielerObj1.MindestensEineImZiel()) // Keine 6 gewuerfelt & mindestens einen im Spielfeld
     {
-        std::cout << "Du hast mindestens einen Spieler im Spielfeld." << std::endl;
+        std::cout << "Du hast eine " << Wuerfelzahl << " gewuerfelt." << std::endl;
+        std::cout << "[Spielzug]: Du hast mindestens einen Spieler im Spielfeld." << std::endl;
+        std::cin.ignore();
         if(FigurenBewegbar(Wuerfelzahl, SpielerObj1, SpielfeldObj))
         {
-            std::cout << "Du hast bewegbare Figuren." << std::endl << std::endl;
+            std::cout << "[Spielzug]: Du hast bewegbare Figuren." << std::endl;
             int FigurIndex = SpielerObj1.FigurAussuchen();
             FigurBewegen(Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
         }
         else
         {
-            std::cout << "Kein Spieler Bewegbar" << std::endl << std::endl;
+            std::cout << "[Spielzug]: Kein Spieler Bewegbar" << std::endl << std::endl;
+            std::cin.ignore();
             return;
         }
             
@@ -88,74 +128,104 @@ void Spielablauf::Spielzug(int Wuerfelzahl, Spieler SpielerObj1, Spieler Spieler
     else //Wird zu dem dadrueber
     {
         std::cout << "[error]: common knowledge debugger triggered" << std::endl << std::endl;
+        std::cin.ignore();
     }
 }
 
-void Spielablauf::FigurBewegen(int Wuerfelzahl, int FigurIndex, Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Bewegung der Figur
+void Spielablauf::FigurBewegen(int Wuerfelzahl, int FigurIndex, Spieler &SpielerObj1, Spieler &SpielerObj2, Spieler &SpielerObj3, Spieler &SpielerObj4, Spielfeld &SpielfeldObj) // Bewegung der Figur
 {
     int SFI = BestimmeStartfeldIndex(FigurIndex, SpielerObj1, SpielfeldObj);
-    std::cout << "StartfeldIndex ist " << SFI << std::endl;
+    std::cout << "[FigurBewegen]: StartfeldIndex ist " << SFI << std::endl;
+    std::cin.ignore();
     int NFI = SFI + Wuerfelzahl; // Index des neuen Feldes auf Spielbrett, ergibt sich aus dem Index des Feldes wo man gestartet ist  (SFI) + der Wuerfelzahl
-    std::cout << "NeuerFeldIndex ist " << NFI << std::endl << std::endl;
-    if(UeberSpielfeldendeHinaus(NFI, FigurIndex, SpielerObj1, SpielfeldObj) != NFI) //Korrektur NFI
+    std::cout << "[FigurBewegen]: NeuerFeldIndex ist " << NFI << std::endl;
+    std::cin.ignore();
+
+    NFI = UeberSpielfeldendeHinaus(NFI, FigurIndex, SpielerObj1, SpielfeldObj); //Korrektur NFI
+    if (NFI != InFremdemZielfeld(Wuerfelzahl, SFI, NFI, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj)) //Korektur NFI
     {
-        std::cout << "Du bist ueber das Spielfeld hinaus." << std::endl;
-        NFI = UeberSpielfeldendeHinaus(NFI, FigurIndex, SpielerObj1, SpielfeldObj);
-        std::cout << "Der NeuerFeldIndex ist nun " << NFI << std::endl << std::endl;
+        std::cout << "Figur ist in fremden Zielfeld" << std::endl;
+        NFI = InFremdemZielfeld(Wuerfelzahl, SFI, NFI, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
+        std::cout << "Neuer NFI ist " << NFI << std::endl;
+        std::cin.ignore(); 
     }
-    
+    else
+    {
+        std::cout << "Der NFI muss nicht geaendert werden" << std::endl;
+        std::cout << "Der NFI ist " << NFI << ", das neue Feld ist "<< SpielfeldObj.get_Spielbrett().at(NFI) << std::endl;
+    }
     if(UebersZielHinaus(Wuerfelzahl, FigurIndex, SpielerObj1, SpielfeldObj) ) //Bin ich ueber das Ziel hinaus?
     {
-        std::cout << "Du bist ueber das Ziel hinaus." << std::endl;
+        std::cout << "[FigurBewegen]: Du bist ueber das Ziel hinaus." << std::endl;
+        std::cin.ignore();
         int FigurIndex = SpielerObj1.FigurAussuchen();
         FigurBewegen( Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
-        std::cout << "[system]: break" << std::endl << std::endl;
+        std::cout << "[FigurBewegen]: break" << std::endl << std::endl;
         return;
     }
      
     if(EigeneFigurAufNeuemFeld(FigurIndex, NFI, SpielerObj1, SpielfeldObj) != FigurIndex) //Ist eine Figur auf dem neuen Feld?
     {
-        std::cout << "Deine eigene Figur steht auf dem Feld auf das du willst " << std::endl << std::endl;
+        std::cout << "[FigurBewegen]: Deine eigene Figur steht auf dem Feld auf das du willst " << std::endl << std::endl;
+        std::cin.ignore();
         SpielerObj1.FigurAussuchen();
         FigurBewegen( Wuerfelzahl, FigurIndex, SpielerObj1, SpielerObj2, SpielerObj3, SpielerObj4, SpielfeldObj);
-        std::cout << "[system]: break" << std::endl << std::endl;
+        std::cout << "[FigurBewegen]: break" << std::endl << std::endl;
         return;
     }
     
-    std::string NeuesFeld = SpielfeldObj.get_Spielbrett().at(NFI); // Das neue Feld wird aus dem Spielbrett gelesen
-    std::cout << "Das neue Feld ist nun " << NeuesFeld << std::endl << std::endl;
+    std::string neuesFeld = SpielfeldObj.get_Spielbrett().at(NFI); // Das neue Feld wird aus dem Spielbrett gelesen
+    std::cout << "[FigurBewegen]: Das neue Feld ist nun " << neuesFeld << std::endl << std::endl;
+    SpielerObj1.get_aktuellesFeld().at(FigurIndex) = neuesFeld; //Das neue Feld wird der Figur im Array zugewiesen
+    std::cin.ignore();
 
-    SpielerObj1.get_aktuellesFeld().at(FigurIndex) = NeuesFeld; //Das neue Feld wird der Figur im Array zugewiesen
-
-    std::cout << "Stimmt " << NeuesFeld << " mit " << SpielerObj1.get_aktuellesFeld().at(FigurIndex) << "ueberein?" << std::endl << std::endl;
-    SpielerObj1.get_Distanz().at(FigurIndex) += Wuerfelzahl; //Die Distanz wird erhöht
-    std::cout << "Die Distanz ist nun " << SpielerObj1.get_Distanz().at(FigurIndex) << std::endl << std::endl;
+    std::cout << "[FigurBewegen]: Distanz" << std::endl;
+    std::cout << "[FigurBewegen]: " << SpielerObj1.get_Distanz().at(FigurIndex) << " + " << Wuerfelzahl << " = " << SpielerObj1.get_Distanz().at(FigurIndex) + Wuerfelzahl << std::endl;
+    SpielerObj1.get_Distanz().at(FigurIndex) = SpielerObj1.get_Distanz().at(FigurIndex) + Wuerfelzahl; //Die Distanz wird erhoeht
+    neuesFeld = SpielerObj1.get_aktuellesFeld().at(FigurIndex); // Das neue Feld wird aktualisiert
+    std::cout << "[FigurBewegen]: Die Distanz ist nun " << SpielerObj1.get_Distanz().at(FigurIndex) << std::endl << std::endl;
+    std::cin.ignore();
 }
 
-bool Spielablauf::FigurenBewegbar(int Wuerfelzahl,  Spieler SpielerObj1, Spielfeld SpielfeldObj) //Sind die Figuren eines Spielers bewegbar
+bool Spielablauf::FigurenBewegbar(int Wuerfelzahl,  Spieler &SpielerObj1, Spielfeld &SpielfeldObj) //Sind die Figuren eines Spielers bewegbar
 {
-    for(int FigurIndex = 0; FigurIndex < SpielerObj1.get_aktuellesFeld().max_size();FigurIndex++)
+    std::cout << "[FigurenBewegbar]: Figur Bewegbar Ueberpruefung" << std::endl;
+    std::cin.ignore();
+    for(unsigned int FigurIndex = 0; FigurIndex < SpielerObj1.get_aktuellesFeld().max_size();FigurIndex++)
     {
+        std::cout << "[FigurenBewegbar]: Figur an Stelle " << FigurIndex << std::endl;
+        std::cin.ignore();
+
         int SFI = BestimmeStartfeldIndex(FigurIndex, SpielerObj1, SpielfeldObj);
         int NFI = SFI + Wuerfelzahl; // Index des neuen Feldes auf Spielbrett, ergibt sich aus dem Index des Feldes wo man gestartet ist  (SFI) + der Wuerfelzahl
-
+        std::cout << "[FigurenBewegbar]:  SFI: " << SFI << ", NFI: " << NFI << std::endl;
         if(UeberSpielfeldendeHinaus(NFI, FigurIndex, SpielerObj1, SpielfeldObj) != NFI) //Ist die Figur
         {
             NFI = UeberSpielfeldendeHinaus(NFI, FigurIndex, SpielerObj1, SpielfeldObj);
         }
         
-        if(UebersZielHinaus(Wuerfelzahl, FigurIndex, SpielerObj1, SpielfeldObj) )
+        if(UebersZielHinaus(Wuerfelzahl, FigurIndex, SpielerObj1, SpielfeldObj))
         {
-            if(EigeneFigurAufNeuemFeld(FigurIndex, NFI, SpielerObj1, SpielfeldObj) == FigurIndex)
-            {
-                return true;        
-            }     
-        }   
+            std::cout << "[FigurBewegbar]: Figur kommt bers Ziel hinaus." << NFI << std::endl;
+            
+            return false;
+        }
+        if(EigeneFigurAufNeuemFeld(FigurIndex, NFI, SpielerObj1, SpielfeldObj) == (int) FigurIndex)
+        {
+            std::cout << "[FigurBewegbar]: Eigene Figur ist auf neuem Feld" << std::endl;
+            return false;        
+        }
+        if(SpielerObj1.FigurImLager(FigurIndex) && Wuerfelzahl != 6)
+        {
+            std::cout << "[FigurBewegbar]: Du hast eine Figur ausgewaehlt, die im Lager steh, obwohl du keine 6 hast." << std::endl;
+            return false;
+        }
     }
-    return false;
+    std::cout << "[FigurBewegbar]: Deine Figur ist Bewegbar." << std::endl;
+    return true;
 }
 
-bool Spielablauf::UebersZielHinaus(int Wuerfelzahl, int FigurIndex, Spieler SpielerObj1, Spielfeld SpielfeldObj) // Schaut ob die gelaufene Distanz einer Figur groesser ist als 44 (zweite Runde) und uebergibt einen Wahrheitswert
+bool Spielablauf::UebersZielHinaus(int Wuerfelzahl, int FigurIndex, Spieler &SpielerObj1, Spielfeld &SpielfeldObj) // Schaut ob die gelaufene Distanz einer Figur groesser ist als 44 (zweite Runde) und uebergibt einen Wahrheitswert
 {
     if ((SpielerObj1.get_Distanz().at(FigurIndex) + Wuerfelzahl > 44)) // Ist Figur an FigurIndex schon mehr als 44 Felder gelaufen?
     {
@@ -167,7 +237,7 @@ bool Spielablauf::UebersZielHinaus(int Wuerfelzahl, int FigurIndex, Spieler Spie
     }
 }
 
-int Spielablauf::SpielerAufStartfeld(int FigurIndex, Spieler SpielerObj1) // Ueberprueft, ob ein Spieler auf dem Startfeld steht und gibt die Figur zurueck, die beweg werden muss.
+int Spielablauf::SpielerAufStartfeld(int FigurIndex, Spieler &SpielerObj1) // Ueberprueft, ob ein Spieler auf dem Startfeld steht und gibt die Figur zurueck, die beweg werden muss.
 {
     for (unsigned int i = 0; i < SpielerObj1.get_aktuellesFeld().max_size(); i++) // Geht das AktuellesFeld Array durch
     {
@@ -179,7 +249,7 @@ int Spielablauf::SpielerAufStartfeld(int FigurIndex, Spieler SpielerObj1) // Ueb
     return FigurIndex; // Index vom Ursprünglichen Spieler
 }
 
-int Spielablauf::UeberSpielfeldendeHinaus(int NFI, int FigurIndex, Spieler SpielerObj1, Spielfeld SpielfeldObj) // Ueberprüft, ob ich über das Spielfeldarray hinaus bin
+int Spielablauf::UeberSpielfeldendeHinaus(int NFI, int FigurIndex, Spieler &SpielerObj1, Spielfeld &SpielfeldObj) // Ueberprüft, ob ich über das Spielfeldarray hinaus bin
 {
     if ((unsigned int)NFI >= SpielfeldObj.get_Spielbrett().max_size()) // Ist mein FigurIndex groesser als mein Spielfeld
     {
@@ -193,36 +263,54 @@ int Spielablauf::UeberSpielfeldendeHinaus(int NFI, int FigurIndex, Spieler Spiel
     }
 }
 
-std::string Spielablauf::InFremdemZielfeld(int Wuerfelzahl, int SFI, int NeuesFeldIndex, std::string NeuesFeld, Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Bin ich in einem fremden Zielfeld gelandet?
+int Spielablauf::InFremdemZielfeld(int Wuerfelzahl, int SFI, int NFI, Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Bin ich in einem fremden Zielfeld gelandet?
 {
+    std::cout << "[InFremdemZielfeld]: Ueberpruefung" << std::endl;
+    
+    
     for (unsigned int i = 0; i < SpielerObj2.get_Zielfelder().max_size(); i++)
     {
-        if (SpielerObj2.get_Zielfelder().at(i) == NeuesFeld) // Ist das Neue Feld ein Zielfeld von Spieler2?
+        std::cout << "Zielfeld von Spieler 2: " << SpielerObj2.get_Zielfelder().at(i) << std::endl; //Debugging
+        std::cout << "Neues Feld: " << SpielfeldObj.get_Spielbrett().at(NFI) << std::endl; //Debugging
+
+        if (SpielerObj2.get_Zielfelder().at(i) == SpielfeldObj.get_Spielbrett().at(NFI)) // Ist das Neue Feld ein Zielfeld von Spieler2?
         {
-            NeuesFeldIndex = SFI + Wuerfelzahl + 4;                       // Raus aus dem Bereich der Zielfelder von Spieler2
-            NeuesFeld = SpielfeldObj.get_Spielbrett().at(NeuesFeldIndex); // NeuesFeld wird aktualisiert
+            std::cout << "[InFremdemZielfeld]: Du bist in einem fremden Zielfeld gelandet." << std::endl;
+            std::cin.ignore();
+            NFI = NFI +4; // Raus aus dem Bereich der Zielfelder von Spieler2
+            std::cout << "[InFremdemZielfeld]: NFI ist jetzt " << NFI << std::endl;
         }
     }
     for (unsigned int i = 0; i < SpielerObj3.get_Zielfelder().max_size(); i++) // Ist das Neue Feld ein Zielfeld von Spieler3?
     {
-        if (SpielerObj3.get_Zielfelder().at(i) == NeuesFeld)
+        std::cout << "Zielfeld von Spieler 3: " << SpielerObj3.get_Zielfelder().at(i) << std::endl; //Debugging
+        std::cout << "Neues Feld: " << SpielfeldObj.get_Spielbrett().at(NFI) << std::endl; //Debugging
+
+        if (SpielerObj3.get_Zielfelder().at(i) == SpielfeldObj.get_Spielbrett().at(NFI)) 
         {
-            NeuesFeldIndex = SFI + Wuerfelzahl + 4;                       // Raus aus dem Bereich der Zielfelder von Spieler3
-            NeuesFeld = SpielfeldObj.get_Spielbrett().at(NeuesFeldIndex); // NeuesFeld wird aktualisiert
+            std::cout << "[InFremdemZielfeld]: Du bist in einem fremden Zielfeld gelandet." << std::endl;
+            std::cin.ignore();
+            NFI = NFI +4; // Raus aus dem Bereich der Zielfelder von Spieler3
+            std::cout << "[InFremdemZielfeld]: NFI ist jetzt " << NFI << std::endl;
         }
     }
     for (unsigned int i = 0; i < SpielerObj4.get_Zielfelder().max_size(); i++) // Ist das Neue Feld ein Zielfeld von Spieler4?
     {
-        if (SpielerObj4.get_Zielfelder().at(i) == NeuesFeld)
+        std::cout << "Zielfeld von Spieler 4: " << SpielerObj4.get_Zielfelder().at(i) << std::endl; //Debugging
+        std::cout << "Neues Feld: " << SpielfeldObj.get_Spielbrett().at(NFI) << std::endl; //Debugging
+
+        if (SpielerObj4.get_Zielfelder().at(i) == SpielfeldObj.get_Spielbrett().at(NFI)) 
         {
-            NeuesFeldIndex = SFI + Wuerfelzahl + 4;                       // Raus aus dem Bereich der Zielfelder von Spieler4
-            NeuesFeld = SpielfeldObj.get_Spielbrett().at(NeuesFeldIndex); // NeuesFeld wird aktualisiert
+            std::cout << "[InFremdemZielfeld]: Du bist in einem fremden Zielfeld gelandet." << std::endl;
+            std::cin.ignore();
+            NFI = NFI +4; // Raus aus dem Bereich der Zielfelder von Spieler3
+            std::cout << "[InFremdemZielfeld]: NFI ist jetzt " << NFI << std::endl;
         }
     }
-    return NeuesFeld;
+    return NFI;
 }
 
-int Spielablauf::EigeneFigurAufNeuemFeld(int FigurIndex, int NFI, Spieler SpielerObj1, Spielfeld SpielfeldObj) // Ueberprueft, ob eine Figur des aktuellen Spielers auf dem neuen Feld steht
+int Spielablauf::EigeneFigurAufNeuemFeld(int FigurIndex, int NFI, Spieler &SpielerObj1, Spielfeld &SpielfeldObj) // Ueberprueft, ob eine Figur des aktuellen Spielers auf dem neuen Feld steht
 {
     std::string NeuesFeld = SpielfeldObj.get_Spielbrett().at(NFI);
     for (unsigned int i = 0; i < SpielerObj1.get_aktuellesFeld().max_size(); i++)
@@ -238,7 +326,7 @@ int Spielablauf::EigeneFigurAufNeuemFeld(int FigurIndex, int NFI, Spieler Spiele
     return FigurIndex; // Wenn ja, gib den Index der Figur zurueck, welche wir gerade schon bewegen.
 }
 
-void Spielablauf::SpielerAufNeuemFeld(std::string NeuesFeld, Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4, Spielfeld SpielfeldObj) // Ist eine andere Spielfigur auf meinem neuen Feld?
+void Spielablauf::SpielerAufNeuemFeld(std::string NeuesFeld, Spieler &SpielerObj1, Spieler &SpielerObj2, Spieler &SpielerObj3, Spieler &SpielerObj4, Spielfeld &SpielfeldObj) // Ist eine andere Spielfigur auf meinem neuen Feld?
 {
     for (unsigned int i = 0; i < SpielerObj2.get_aktuellesFeld().max_size(); i++)
     {
@@ -266,12 +354,11 @@ void Spielablauf::SpielerAufNeuemFeld(std::string NeuesFeld, Spieler SpielerObj1
     }
 }
 
-int Spielablauf::BestimmeStartfeldIndex(int FigurIndex, Spieler SpielerObj, Spielfeld SpielfeldObj) // Bestimmt den Index auf dem Array Spielbrett, an welcher sich das Startfeld des eingegebenen Spielers befindet.
+int Spielablauf::BestimmeStartfeldIndex(int FigurIndex, Spieler &SpielerObj, Spielfeld &SpielfeldObj) // Bestimmt den Index auf dem Array Spielbrett, an welcher sich das Startfeld des eingegebenen Spielers befindet.
 {
-    int SFI;                                 // StartFeldIndex, Zahl zum rechnen
     if (SpielerObj.FigurImLager(FigurIndex)) // Wenn das aktuelle Feld der Figur "X" ist
     {
-        for (int i = 0; i < SpielfeldObj.get_Spielbrett().max_size(); i++) // Gehe das Spielfeld durch
+        for (unsigned int i = 0; i < SpielfeldObj.get_Spielbrett().max_size(); i++) // Gehe das Spielfeld durch
         {
             if (SpielfeldObj.get_Spielbrett().at(i) == SpielerObj.get_Startfeld()) // Ueberpruefe, ob das Feld an Index i gleich dem Startfeld des Spielers ist
             {
@@ -281,7 +368,7 @@ int Spielablauf::BestimmeStartfeldIndex(int FigurIndex, Spieler SpielerObj, Spie
     }
     else // Wenn das aktuelle Feld der Figur nicht "X" ist
     {
-        for (int i = 0; i < SpielfeldObj.get_Spielbrett().max_size(); i++) // Gehe das Spielfeld durch
+        for (unsigned int i = 0; i < SpielfeldObj.get_Spielbrett().max_size(); i++) // Gehe das Spielfeld durch
         {
             if (SpielfeldObj.get_Spielbrett().at(i) == SpielerObj.get_aktuellesFeld().at(FigurIndex)) // Ueberpruefe, ob das Feld an Index i gleich dem aktuellen Feld des Spielers ist
             {
@@ -290,10 +377,10 @@ int Spielablauf::BestimmeStartfeldIndex(int FigurIndex, Spieler SpielerObj, Spie
         }
     }
     std::cout << "[error]: Startfeld der Figur " << FigurIndex << " konnte nicht gefunden werden." << std::endl;
-    return NULL;
+    return 0;
 }
 
-bool Spielablauf::SpielEnde(Spieler SpielerObj1, Spieler SpielerObj2, Spieler SpielerObj3, Spieler SpielerObj4) // Ueberprueft, ob mindestens ein Spieler alle Figuren im Ziel hat.
+bool Spielablauf::SpielEnde(Spieler &SpielerObj1, Spieler &SpielerObj2, Spieler &SpielerObj3, Spieler &SpielerObj4) // Ueberprueft, ob mindestens ein Spieler alle Figuren im Ziel hat.
 {
     if ((SpielerObj1.AlleFigurenImZiel() || SpielerObj2.AlleFigurenImZiel()) || (SpielerObj3.AlleFigurenImZiel() || SpielerObj4.AlleFigurenImZiel()))
     {
@@ -305,16 +392,16 @@ bool Spielablauf::SpielEnde(Spieler SpielerObj1, Spieler SpielerObj2, Spieler Sp
     }
 }
 
-/**
- * \brief Kurzbeschreibung
- *
- * Langbeschriebung
- * @param parameter1 Funktion des Parameters 1
- * @param parameter2 Funktion des Parameters 2
- * @see Referenz auf andere Funktion, die ähnliches macht oder dazu gehört
- * @return Beschreibung des Rückgabewertes
- * @pre Bedingungen, die vor dem Aufruf der Funktion erfüllt sein müssen
- * @post Bedingungen, die nach dem Aufruf der Funktion erfüllt sind
- * @since Wann die Funktion eingeführt wurde
- * @author Autor der Funktion
+/*
+  \brief Kurzbeschreibung
+ 
+  Langbeschriebung
+  @param parameter1 Funktion des Parameters 1
+  @param parameter2 Funktion des Parameters 2
+  @see Referenz auf andere Funktion, die ähnliches macht oder dazu gehört
+  @return Beschreibung des Rückgabewertes
+  @pre Bedingungen, die vor dem Aufruf der Funktion erfüllt sein müssen
+  @post Bedingungen, die nach dem Aufruf der Funktion erfüllt sind
+  @since Wann die Funktion eingeführt wurde
+  @author Autor der Funktion
  */

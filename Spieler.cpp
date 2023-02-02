@@ -32,16 +32,15 @@ std::string Spieler::get_Startfeld() // Gibt den String "Startfeld" zurueck.
 
 std::array<std::string, 4> Spieler::get_Zielfelder() // Gibt das Array "Zielfelder" zurueck.
 {
-    std::cout << "Size Zielfelder: " << sizeof(Zielfelder) << std::endl;
     return Zielfelder;
 }
 
-std::array<std::string, 4> Spieler::get_aktuellesFeld() // Gibt das Array "aktuellesFeld" zurueck.
+std::array<std::string, 4> & Spieler::get_aktuellesFeld() // Gibt das Array "aktuellesFeld" zurueck.
 {
     return aktuellesFeld;
 }
 
-std::array<int, 4> Spieler::get_Distanz() // Gibt das Array "aktuellesFeld" zurueck.
+std::array<int, 4> & Spieler::get_Distanz() // Gibt das Array "aktuellesFeld" zurueck.
 {
     return Distanz;
 }
@@ -181,7 +180,7 @@ int Spieler::ZufaelligerAusFeld() // Prueft, welche Spielfiguren auf dem Spielfe
 
 bool Spieler::MindestensEineImLager() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
 {
-    for (int i = 0; i < aktuellesFeld.max_size(); i++)
+    for (unsigned int i = 0; i < aktuellesFeld.max_size(); i++)
     {
         if (FigurImLager(i))
         {
@@ -193,7 +192,7 @@ bool Spieler::MindestensEineImLager() // Uberprueft, ob mindestens eine Spielfig
 
 bool Spieler::MindestensEineImSpielfeld() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
 {
-    for (int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
+    for (unsigned int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
     {
         if (!(FigurImZiel(i)) && !(FigurImLager(i))) // Ist Figur nicht im Ziel und nicht im Lager
         {
@@ -205,7 +204,7 @@ bool Spieler::MindestensEineImSpielfeld() // Uberprueft, ob mindestens eine Spie
 
 bool Spieler::MindestensEineImZiel() // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
 {
-    for (int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
+    for (unsigned int i = 0; i < aktuellesFeld.max_size(); i++) // Geht das aktuellesFeld-Array durch
     {
         if (!(FigurAufSpielfeld(i)) && !(FigurImLager(i))) // Ist Figur nicht im Ziel und nicht im Lager
         {
@@ -217,7 +216,7 @@ bool Spieler::MindestensEineImZiel() // Uberprueft, ob mindestens eine Spielfigu
 
 int Spieler::FigurAussuchen()
 {
-    std::cout << "Wähle FigurIndex: ";
+    std::cout << "Waehle eine Figur, die du Bewegen willst: ";
     int FigurIndex;
     std::cin >> FigurIndex; //Spieler wählt Index
     return FigurIndex;

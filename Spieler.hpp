@@ -30,8 +30,8 @@ public:
     // Getter der Klasse
     std::string get_Startfeld();                    // Gibt das Startfeld der Spieler-Instanz zurÅck
     std::array<std::string, 4> get_Zielfelder();    // Gibt die Zielfelder der Spieler-Instanz zurÅck
-    std::array<std::string, 4> get_aktuellesFeld(); // Gibt das Array der aktuellen Felder der Spielfiguren der Spieler-Instanz zurueck
-    std::array<int, 4> get_Distanz();               // Gibt das Array der Distanzen der Spielfiguren der Spieler-Instanz zurueck
+    std::array<std::string, 4> & get_aktuellesFeld(); // Gibt das Array der aktuellen Felder der Spielfiguren der Spieler-Instanz zurueck
+    std::array<int, 4> & get_Distanz();               // Gibt das Array der Distanzen der Spielfiguren der Spieler-Instanz zurueck
 
     // Debug
     void DatenAusgabe();
