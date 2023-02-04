@@ -4,4 +4,4 @@ Dies ist mein Abschlussprojekt in meinem ersten Semester an der HTWK Leipzig. Es
 
 ## Funktionsweise
 
-//todo
+Wenn ein Spieler eine 6 Würfelt und eine Figur auf das Startfeld setzt muss er diese Figur dann weiter setzen

@@ -17,6 +17,7 @@
 class Spieler
 {
 private:
+    int Kennzeichner;
     std::string Lager;                        // String dem die Zahl des Lagers ("X") zugewissen wird.
     std::string Startfeld;                    // String dem das Startfeld des Spielers zugewiesen wird.
     std::array<std::string, 4> Zielfelder;    // Array der Groesse 4 welches mit Strings der vier Zielfelder gefuellt wird.
@@ -24,10 +25,11 @@ private:
     std::array<int, 4> Distanz;               // Array der Groesse 4 welches mit Strings der aktuellen Positionen der vier Spielfiguren gefuellt wird.
 
 public:
-    Spieler(std::string, std::array<std::string, 4>, std::array<std::string, 4>, std::array<int, 4>); // Konstruktor der Klasse Spieler
+    Spieler(int, std::string, std::array<std::string, 4>, std::array<std::string, 4>, std::array<int, 4>); // Konstruktor der Klasse Spieler
     ~Spieler();                                                                                       // Destruktor der Klasse Spieler
 
     // Getter der Klasse
+    int get_Kennzeichner();
     std::string get_Startfeld();                    // Gibt das Startfeld der Spieler-Instanz zurÅck
     std::array<std::string, 4> get_Zielfelder();    // Gibt die Zielfelder der Spieler-Instanz zurÅck
     std::array<std::string, 4> & get_aktuellesFeld(); // Gibt das Array der aktuellen Felder der Spielfiguren der Spieler-Instanz zurueck

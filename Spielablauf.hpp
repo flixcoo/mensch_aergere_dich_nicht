@@ -35,4 +35,6 @@ public:
     bool UebersZielHinaus(int, int, Spieler&, Spielfeld&);
     int SpielerAufStartfeld(int, Spieler&); // Gibt den FigurenIndex der Figur zurueck, welche auf dem Startfeld steht. Wenn keine daraufsteht = "-1"
     bool FigurenBewegbar(int, Spieler&, Spielfeld&);
+    void SpielfeldDrucken(Spieler&, Spieler&,Spieler&,Spieler&,Spielfeld&);
+    int BestimmeIndexDesStartfelds(Spieler&, Spielfeld&);
 };

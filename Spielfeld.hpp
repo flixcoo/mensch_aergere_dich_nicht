@@ -25,4 +25,5 @@ public:
 
     void InitialisiereSpiel();
     std::array<std::string, 56> get_Spielbrett();
+
 };

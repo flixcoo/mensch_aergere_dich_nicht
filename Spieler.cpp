@@ -7,15 +7,16 @@
 #include "Zufall.hpp"
 
 // Konstruktor
-Spieler::Spieler(std::string Startfeld, std::array<std::string, 4> Zielfelder, std::array<std::string, 4> aktuellesFeld, std::array<int, 4> Distanz) // Erschafft einen Spieler mit dem Startfeld, den Zielfeldern und den aktuellen Feldern als Eingabe.
+Spieler::Spieler(int Kennzeichner, std::string Startfeld, std::array<std::string, 4> Zielfelder, std::array<std::string, 4> aktuellesFeld, std::array<int, 4> Distanz) // Erschafft einen Spieler mit dem Startfeld, den Zielfeldern und den aktuellen Feldern als Eingabe.
 {
-    this->Startfeld = Startfeld;         // String der das Startfeld des Spielers enthaelt
-    this->Zielfelder = Zielfelder;       // Array der Groesse 4 welches die vier Zielfelder enthaelt
-    this->aktuellesFeld = aktuellesFeld; // Array der Groesse 4 welches Strings mit den aktuellen Positionen der vier Spielfiguren enthaelt
+    this->Kennzeichner = Kennzeichner; //Integer mit einem Kennzeichner für den Spieler
+    this->Startfeld = Startfeld; // String der das Startfeld des Spielers enthaelt
+    this->Zielfelder = Zielfelder; // Array der Groesse 4 welches die vier Zielfelder enthaelt
+    this->aktuellesFeld = aktuellesFeld; //Array der Groesse 4 welches Strings mit den aktuellen Positionen der vier Spielfiguren enthaelt
     this->Distanz = Distanz;
-    Lager = "X"; // Zeichen, anhand dessen das Programm erkennt, dass sich eine Figur im Lager befindet.
+    Lager = "X"; //Zeichen, anhand dessen das Programm erkennt, dass sich eine Figur im Lager befindet.
 
-    std::cout << "[System]: Spieler initialisiert" << std::endl; // Konsolenausgabe
+    std::cout << "[System]: Spieler " << Kennzeichner << " initialisiert" << std::endl; // Konsolenausgabe
 }
 
 // Destruktor
@@ -25,6 +26,10 @@ Spieler::~Spieler()
 }
 
 // Getter der Klasse
+int Spieler::get_Kennzeichner()
+{
+    return Kennzeichner;
+}
 std::string Spieler::get_Startfeld() // Gibt den String "Startfeld" zurueck.
 {
     return Startfeld;
