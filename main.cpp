@@ -3,79 +3,51 @@
 #include <vector>
 #include <array>
 
-#include "Spieler.hpp"
-#include "Spielablauf.hpp"
-#include "Spielfeld.hpp"
-#include "Zufall.hpp"
+#include "Player.hpp"
+#include "Gameplay.hpp"
+#include "PlayingField.hpp"
+#include "System.hpp"
 
 // Datensaetze der Spieler
-int Spieler1_Kennzeichner = 1;
-std::string Spieler1_Startfeld = "0";
-std::array<std::string, 4> Spieler1_Zielfelder = {"0a", "0b", "0c", "0d"};
-std::array<std::string, 4> Spieler1_aktuellesSpielfeld = {"X", "X", "X", "X"};
-std::array<int, 4> Spieler1_Distanz = {0, 0, 0, 0};
+int player1_identifier = 1;
+std::string player1_startingField = "0";
+std::array<std::string, 4> player1_targetFields = {"0a", "0b", "0c", "0d"};
+std::array<std::string, 4> player1_currentField = {"X", "X", "X", "X"};
+std::array<int, 4> player1_distance = {0, 0, 0, 0};
 
-int Spieler2_Kennzeichner = 2;
-std::string Spieler2_Startfeld = "10";
-std::array<std::string, 4> Spieler2_Zielfelder = {"1a", "1b", "1c", "1d"};
-std::array<std::string, 4> Spieler2_aktuellesSpielfeld = {"X", "X", "X", "X"};
-std::array<int, 4> Spieler2_Distanz = {0, 0, 0, 0};
+int player2_identifier = 2;
+std::string player2_startingField = "10";
+std::array<std::string, 4> player2_targetFields = {"1a", "1b", "1c", "1d"};
+std::array<std::string, 4> player2_currentField = {"X", "X", "X", "X"};
+std::array<int, 4> player2_distance = {0, 0, 0, 0};
 
-int Spieler3_Kennzeichner = 3;
-std::string Spieler3_Startfeld = "20";
-std::array<std::string, 4> Spieler3_Zielfelder = {"2a", "2b", "2c", "2d"};
-std::array<std::string, 4> Spieler3_aktuellesSpielfeld = {"X", "X", "X", "X"};
-std::array<int, 4> Spieler3_Distanz = {0, 0, 0, 0};
+int player3_identifier = 3;
+std::string player3_startingField = "20";
+std::array<std::string, 4> player3_targetFields = {"2a", "2b", "2c", "2d"};
+std::array<std::string, 4> player3_currentField = {"X", "X", "X", "X"};
+std::array<int, 4> player3_distance = {0, 0, 0, 0};
 
-int Spieler4_Kennzeichner = 4;
-std::string Spieler4_Startfeld = "30";
-std::array<std::string, 4> Spieler4_Zielfelder = {"3a", "3b", "3c", "3d"};
-std::array<std::string, 4> Spieler4_aktuellesSpielfeld = {"X", "X", "X", "X"};
-std::array<int, 4> Spieler4_Distanz = {0, 0, 0, 0};
-
-void Spielerausgabe(Spieler&,Spieler&,Spieler&,Spieler&);
+int player4_identifier = 4;
+std::string player4_startingField = "30";
+std::array<std::string, 4> player4_targetFields = {"3a", "3b", "3c", "3d"};
+std::array<std::string, 4> player4_currentField = {"X", "X", "X", "X"};
+std::array<int, 4> player4_distance = {0, 0, 0, 0};
 
 int main()
 {
-    Spielablauf Mensch_Aergere_dich_nicht;                                                  //Initialisiert das Spielablaufobjekt "Mensch_Aergere_dich_nicht".
-    Spielfeld Spielbrett; // Initialisiert das Spielfeldobjekt "Spielbrett".
-    
-    Spielbrett.InitialisiereSpiel(); // Fuehrt die Methode "InitialisiereSpiel" des Spielfeldobjekt "Spielbrett" aus.
+    Spielablauf Mensch_Aergere_dich_nicht; // Initialisiert das Spielablaufobjekt "Mensch_Aergere_dich_nicht".
+    PlayingField Board;                       // Initialisiert das Spielfeldobjekt "Board".
 
-    Spieler Spieler1(Spieler1_Kennzeichner, Spieler1_Startfeld, Spieler1_Zielfelder, Spieler1_aktuellesSpielfeld, Spieler1_Distanz); // Erschafft ein Spielerobjekt "Spieler 1" mit den gegebenen Startwerten.
-    Spieler Spieler2(Spieler2_Kennzeichner, Spieler2_Startfeld, Spieler2_Zielfelder, Spieler2_aktuellesSpielfeld, Spieler2_Distanz); // Erschafft ein Spielerobjekt "Spieler 2" mit den gegebenen Startwerten.
-    Spieler Spieler3(Spieler3_Kennzeichner, Spieler3_Startfeld, Spieler3_Zielfelder, Spieler3_aktuellesSpielfeld, Spieler3_Distanz); // Erschafft ein Spielerobjekt "Spieler 3" mit den gegebenen Startwerten.
-    Spieler Spieler4(Spieler4_Kennzeichner, Spieler4_Startfeld, Spieler4_Zielfelder, Spieler4_aktuellesSpielfeld, Spieler4_Distanz); // Erschafft ein Spielerobjekt "Spieler 4" mit den gegebenen Startwerten
-          
-    Mensch_Aergere_dich_nicht.EineRunde(Spieler1, Spieler2, Spieler3, Spieler4, Spielbrett);
+    System::initialiseGame(); // Fuehrt die Methode "InitialisiereSpiel" des Spielfeldobjekt "Board" aus.
 
-    Mensch_Aergere_dich_nicht.EineRunde(Spieler1, Spieler2, Spieler3, Spieler4, Spielbrett);
-    
-    Mensch_Aergere_dich_nicht.EineRunde(Spieler1, Spieler2, Spieler3, Spieler4, Spielbrett);    
-    
-    /*while(!(Mensch_Aergere_dich_nicht.SpielEnde(Spieler1, Spieler2, Spieler3, Spieler4)))
+    Player player1(player1_identifier, player1_startingField, player1_targetFields, player1_currentField, player1_distance); // Erschafft ein Spielerobjekt "player1" mit den gegebenen Startwerten.
+    Player player2(player2_identifier, player2_startingField, player2_targetFields, player2_currentField, player2_distance); // Erschafft ein Spielerobjekt "player2" mit den gegebenen Startwerten.
+    Player player3(player3_identifier, player3_startingField, player3_targetFields, player3_currentField, player3_distance); // Erschafft ein Spielerobjekt "player3" mit den gegebenen Startwerten.
+    Player player4(player4_identifier, player4_startingField, player4_targetFields, player4_currentField, player4_distance); // Erschafft ein Spielerobjekt "player4" mit den gegebenen Startwerten.
+
+    while (!(Mensch_Aergere_dich_nicht.SpielEnde(player1, player2, player3, player4)))
     {
-        Mensch_Aergere_dich_nicht.EineRunde(Spieler1, Spieler2, Spieler3, Spieler4 , Spielbrett);
-    }*/
-}
-
-void Spielerausgabe(Spieler &Spieler1,Spieler &Spieler2,Spieler &Spieler3,Spieler &Spieler4) //temporaer, nur zum debuggen
-{
-    std::cout << std::endl << "--------- Spieler 1 ---------" << std::endl << std::endl;
-    Spieler1.DatenAusgabe();
-    std::cin.ignore();
-
-    std::cout << std::endl << "--------- Spieler 2 ---------" << std::endl << std::endl;
-    Spieler2.DatenAusgabe();
-    std::cin.ignore();
-
-    std::cout << std::endl << "--------- Spieler 3 ---------" << std::endl << std::endl;
-    Spieler3.DatenAusgabe();
-    std::cin.ignore();
-
-    std::cout << std::endl << "--------- Spieler 4 ---------" << std::endl << std::endl;
-    Spieler4.DatenAusgabe();
-    std::cin.ignore();
-
-
+        Mensch_Aergere_dich_nicht.EineRunde(player1, player2, player3, player4, Board);
+    }
+    std::cout << "Das Spiel ist zu Ende!" << std::endl << std::endl;
 }
