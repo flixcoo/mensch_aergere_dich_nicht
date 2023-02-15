@@ -33,27 +33,27 @@ public:
     std::array<int, 4> &get_distance();              // Gibt das Array der Distanzen der Spielfiguren der Player-Instanz zurueck
 
     // Debug
-    void printData();               // REMOVE
+    void printData(); // REMOVE
 
     // Aktionen der Figuren
-    int rollDice();                 // Methode, welche eine Zufallszahl zwischen eins und sechs zurueckgibt.
-    int selectToken();              // Methode, welche den Benutzer eine Spielfigur auswaehlen laesst.
-    int randomFromStorage();        // Methode, welche eine zufaellige Figur aus dem Lager auswaehlt und den Index dieser Figur zurueckgibt.
-    int randomFromArena();          // Methode, welche eine zufaellige Figur aus dem Spielfeld auswaehlt und den Index dieser Figur zurueckgibt.
+    int rollDice();          // Methode, welche eine Zufallszahl zwischen eins und sechs zurueckgibt.
+    int selectToken();       // Methode, welche den Benutzer eine Spielfigur auswaehlen laesst.
+    int randomFromStorage(); // Methode, welche eine zufaellige Figur aus dem Lager auswaehlt und den Index dieser Figur zurueckgibt.
+    int randomFromArena();   // Methode, welche eine zufaellige Figur aus dem Spielfeld auswaehlt und den Index dieser Figur zurueckgibt.
 
     // *Abfragen der Figuren*
     // Einzelabfragen
-    bool tokenInStorage(int);       // Überprüft, ob eine Figur am jeweiligen Index im Lager ist.
-    bool tokenInArena(int);         // Überprüft, ob eine Figur am jeweiligen Index auf dem Spielfeld ist.
-    bool tokenInTargetField(int);   // Überprüft, ob eine Figur am jeweiligen Index auf einem Zielfeld ist.
+    bool tokenInStorage(int);     // Überprüft, ob eine Figur am jeweiligen Index im Lager ist.
+    bool tokenInArena(int);       // Überprüft, ob eine Figur am jeweiligen Index auf dem Spielfeld ist.
+    bool tokenInTargetField(int); // Überprüft, ob eine Figur am jeweiligen Index auf einem Zielfeld ist.
 
     // Gebuendelte Abfragen
-    bool allTokenInStorage();       // Überprüft, ob alle Spielfiguren im Lager sind
-    bool allTokenInArena();         // Überprüft, ob alle Spielfiguren auf dem Spielfeld sind
-    bool allTokenInTargetField();   // Überprüft, ob alle Spielfiguren im Ziel sind
+    bool allTokenInStorage();     // Überprüft, ob alle Spielfiguren im Lager sind
+    bool allTokenInArena();       // Überprüft, ob alle Spielfiguren auf dem Spielfeld sind
+    bool allTokenInTargetField(); // Überprüft, ob alle Spielfiguren im Ziel sind
 
     // Vorraussetzungen
-    bool minOneInStorage();         // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
-    bool minOneInArena();           // Uberprueft, ob mindestens eine Spielfigur im Spielfeld ist.
-    bool minOneInTargetField();     // Uberprueft, ob mindestens eine Spielfigur im Ziel ist.
+    bool minOneInStorage();     // Uberprueft, ob mindestens eine Spielfigur im Lager ist.
+    bool minOneInArena();       // Uberprueft, ob mindestens eine Spielfigur im Spielfeld ist.
+    bool minOneInTargetField(); // Uberprueft, ob mindestens eine Spielfigur im Ziel ist.
 };

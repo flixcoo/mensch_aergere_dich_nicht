@@ -3,7 +3,7 @@
 #include <vector>
 #include <array>
 
-#include "Spieler.hpp"
+#include "Player.hpp"
 #include "System.hpp"
 
 // Konstruktor
@@ -253,4 +253,3 @@ bool Player::minOneInTargetField() // Uberprueft, ob mindestens eine Spielfigur 
     }
     return false;
 }
-

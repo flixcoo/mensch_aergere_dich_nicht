@@ -5,7 +5,7 @@
 
 #include "Player.hpp"
 #include "Gameplay.hpp"
-#include "PlayingField.hpp"
+#include "Gameboard.hpp"
 #include "System.hpp"
 
 // Datensaetze der Spieler
@@ -35,8 +35,8 @@ std::array<int, 4> player4_distance = {0, 0, 0, 0};
 
 int main()
 {
-    Spielablauf Mensch_Aergere_dich_nicht; // Initialisiert das Spielablaufobjekt "Mensch_Aergere_dich_nicht".
-    PlayingField Board;                       // Initialisiert das Spielfeldobjekt "Board".
+    Spielablauf MenschAergeredichnicht; // Initialisiert das Gameplay-Objekt "Mensch_Aergere_dich_nicht".
+    Gameboard Board;                    // Initialisiert das Gameboard-Objekt "Board".
 
     System::initialiseGame(); // Fuehrt die Methode "InitialisiereSpiel" des Spielfeldobjekt "Board" aus.
 
@@ -45,9 +45,10 @@ int main()
     Player player3(player3_identifier, player3_startingField, player3_targetFields, player3_currentField, player3_distance); // Erschafft ein Spielerobjekt "player3" mit den gegebenen Startwerten.
     Player player4(player4_identifier, player4_startingField, player4_targetFields, player4_currentField, player4_distance); // Erschafft ein Spielerobjekt "player4" mit den gegebenen Startwerten.
 
-    while (!(Mensch_Aergere_dich_nicht.SpielEnde(player1, player2, player3, player4)))
+    while (!(MenschAergeredichnicht.endOfGame(player1, player2, player3, player4)))
     {
-        Mensch_Aergere_dich_nicht.EineRunde(player1, player2, player3, player4, Board);
+        MenschAergeredichnicht.playOneRound(player1, player2, player3, player4, Board);
     }
-    std::cout << "Das Spiel ist zu Ende!" << std::endl << std::endl;
+    std::cout << "Das Spiel ist zu Ende!" << std::endl
+              << std::endl;
 }

@@ -2,7 +2,7 @@
 #include <time.h>
 
 #include "System.hpp"
-#include "Spieler.hpp"
+#include "Player.hpp"
 
 /**
  * @brief Diese Funktion generiert eine Zufallszahl.
@@ -17,10 +17,10 @@
  */
 int System::randomizer(int ObereGrenze) // Berechnet eine zufaellige Zahl von 1 bis x
 {
-        srand(time(NULL));
-        int wurf = 0;
-        wurf = rand() % ObereGrenze + 1;
-        return wurf;
+    srand(time(NULL));
+    int wurf = 0;
+    wurf = rand() % ObereGrenze + 1;
+    return wurf;
 }
 
 /**
