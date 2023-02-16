@@ -147,17 +147,11 @@ int Player::selectToken()
     {
         std::cout << "[" << i << "] - Figur " << i << " [Feld:" << std::setw(3) << currentField.at(i);
         if (40 - distance.at(i) < 0)
-        {
             std::cout << " | Noch 0 Feld/-er bis ins Ziel]" << std::endl;
-        }
         else if (40 - distance.at(i) == 1)
-        {
             std::cout << " | Noch " << 40 - distance.at(i) << " Feld bis ins Ziel]" << std::endl;
-        }
         else
-        {
             std::cout << " | Noch " << 40 - distance.at(i) << " Felder bis ins Ziel]" << std::endl;
-        }
     }
 
     int FigurIndex;
@@ -200,12 +194,8 @@ int Player::randomFromStorage()
 {
     std::vector<int> tempVec;
     for (unsigned int i = 0; i < currentField.max_size(); i++) // Geht die Positionen der 4 Spielfiguren eines Spielers durch.
-    {
         if (tokenInStorage(i)) // Checkt ob die Spielfigur sich im Lager befindet
-        {
             tempVec.push_back(i); // Fuegt den Index der startingFieldfiguren in ein Veektor ein.
-        }
-    }
     return tempVec.at((System::randomizer(tempVec.size())) - 1); // DOC WIP
 }
 

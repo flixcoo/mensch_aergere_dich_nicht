@@ -301,7 +301,6 @@ void Gameplay::moveToken(int diceNumber, int TokenIndex, Player &playerObj1, Pla
  */
 bool Gameplay::tokenMovable(int diceNumber, Player &playerObj, Gameboard &gameboardObj) // Sind die Figuren eines Spielers bewegbar
 {
-
     int movableCount = 0;
     for (unsigned int TokenIndex = 0; TokenIndex < playerObj.get_currentField().max_size(); TokenIndex++)
     {
@@ -310,9 +309,7 @@ bool Gameplay::tokenMovable(int diceNumber, Player &playerObj, Gameboard &gamebo
             int SFI = determineStartingFieldIndex(TokenIndex, playerObj, gameboardObj);
             int NFI = SFI + diceNumber; // Index des neuen Feldes auf Spielbrett, ergibt sich aus dem Index des Feldes wo man gestartet ist  (SFI) + der diceNumber
             if (beyondGameboard(NFI, gameboardObj) != NFI)
-            {
                 NFI = beyondGameboard(NFI, gameboardObj);
-            }
             if (beyondTargetField(diceNumber, TokenIndex, playerObj, gameboardObj))
             {
                 // Figur nicht bewegbar
@@ -373,15 +370,9 @@ int Gameplay::beyondGameboard(int NFI, Gameboard &gameboardObj) // Ueberprueft, 
 {
 
     if ((unsigned int)NFI >= gameboardObj.get_board().max_size()) // Ist mein TokenIndex groesser als mein Spielfeld
-    {
-        NFI = NFI - 56; // Groesse des Spielbrettes wird vom Index abgezogen
-
-        return NFI; // Das neues Feld, welches nun nicht mehr ausserhalb des Arrays Spielbrett ist, wird zurueckgegeben
-    }
+        return NFI - 56; // Groesse des Spielbrettes wird vom Index abgezogen
     else
-    {
         return NFI; // Das neue Feld liegt im Array, also wird es einfach zurueckgegeben.
-    }
 }
 
 /**
