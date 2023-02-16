@@ -1,7 +1,4 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <array>
 
 class Gameboard; // Vorher Bekanntmachung fuer Klasse Spielablauf
 class Player;    // Vorher Bekanntmachung fuer Klasse Spielablauf
