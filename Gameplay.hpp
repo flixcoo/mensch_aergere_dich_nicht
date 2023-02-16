@@ -7,32 +7,32 @@ class Gameboard; // Vorher Bekanntmachung fuer Klasse Spielablauf
 class Player;    // Vorher Bekanntmachung fuer Klasse Spielablauf
 
 /**
- * @brief Kurzbeschreibung der Klasse
- * Ausfuehrliche Beschreibung der Funktionalitaet.
- *
+ * @brief Die Klasse regelt den Ablauf des Spiels
+ * Die Klasse hat nur Methoden, welche verschiedenste Spielverlaufe abdecken und ggf. Attribute der Spielerklasse korrigieren.
  * @author Felix Kirchner
  * @see Spieler
  */
-class Spielablauf
+class Gameplay
 {
 public:
     // Ablauf
-    void playOneRound(Player &, Player &, Player &, Player &, Gameboard &); // Methode fuehrt viermal die Methode "Spielzug" aus, jeweils mit einem anderen Spieler am Zug.
-    void printBoard(Player &, Player &, Player &, Player &, Gameboard &);
-    void PlayersTurn(int, Player &, Player &, Player &, Player &, Gameboard &);    // Methode welche einen Spielzug mit einem aktiven  Spieler und drei passiven Spielern darstellt.
-    void MoveToken(int, int, Player &, Player &, Player &, Player &, Gameboard &); // Methode, welche eine Figur bewegt und jedwede Korrekturen und Abfragen enthaelt.
-    bool endOfGame(Player &, Player &, Player &, Player &);
+    void playOneRound(Player &, Player &, Player &, Player &, Gameboard &);        // Methode, die eine Runde des Spiels ausfuehrt.
+    void printBoard(Player &, Player &, Player &, Player &, Gameboard &);          // Methode, welche das Spielfeld mit den aktuellen Positionen der Spielfiguren in der Konsole ausgibt.
+    void playersTurn(int, Player &, Player &, Player &, Player &, Gameboard &);    // Methode welche einen Spielzug mit einem aktiven  Spieler und drei passiven Spielern darstellt.
+    void moveToken(int, int, Player &, Player &, Player &, Player &, Gameboard &); // Methode, welche die Spielfigur bewegt und dabei alle Faelle und Situationen beachtet.
+    bool endOfGame(Player &, Player &, Player &, Player &);                        // Methode, die fuer alle vier Spieler ueberorueft, ob mindestens einer von ihnen alle Spielfiguren in den Zielfeldern hat.
+    int winner(Player &, Player &, Player &, Player &);                            // Methode, die das "identifier"-Attribut des Spielers zurueckgibt, der gewonnen hat.
 
     // Korrekturen
-    void playerOnNewField(int, Player &, Player &, Player &, Player &, Gameboard &); // Methode, welche prueft, ob sich ein Spieler auf dem neuen Feld befindet und ihn zurueck ins Lager setzt.
-    int determineStartingFieldIndex(int, Player &, Gameboard &);                     // Bestimmt den Index des aktuellen Feldes einer Figur der dann als Startfeld verwendet wird.
-    int inForeignTargetField(int, int, Player, Player, Player, Player, Gameboard);   // Falls man sich beim Bewegen in einem Zielfeld der anderen Spieler befinden wuerde, korrigiert diese Methode das neue Feld.
-    int ownTokenOnNewField(int, int, Player &, Gameboard &);                         // Gibt den FigurenIndex der Figur zurueck, die auf dem neuen Feld steht. Falls keine dort steht, wird der Index der Figur die bewegt wird zurÅckgegeben.
-    int beyondGameboard(int, int, Player &, Gameboard &);                            // Ueberprueft, ob das neue Feld im Array "board" drin ist. Wenn nicht, wird das neue Feld korrigiert, ansonsten wird das neue Feld einfahc zurueckgegeben.
-    int PlayerOnStartingField(int, Player &);                                        // Gibt den FigurenIndex der Figur zurueck, welche auf dem Startfeld steht. Wenn keine daraufsteht, wird der Index der aktuell bewegten Figur zurueckgegeben.
-    int DetermineIndexOfStartingField(Player &, Gameboard &);                        // Methoode, welche den Index der Startfeld eines jeweiligen Spielers auf dem Spielbrett ausfindig macht und zurueckgibt.
+    void playerOnNewField(int, Player &, Player &, Player &, Player &, Gameboard &);    // Methode, welche prueft, ob sich ein Spieler auf dem neuen Feld befindet und ihn zurueck ins Lager setzt.
+    int determineStartingFieldIndex(int, Player &, Gameboard &);                        // Methode, welche den Index des aktuellen Feldes einer Figur, der dann als Startfeld verwendet wird, bestimmt.
+    int inForeignTargetField(int, Player &, Player &, Player &, Player &, Gameboard &); // Methode, welche ueberprueft, ob ein Spieler in einem der Zielfelder der anderen Spieler gelandet ist.
+    int ownTokenOnNewField(int, int, Player &, Gameboard &);                            // Methode, welche auf eigene Spieler auf dem neuen Feld ueberprueft.
+    int beyondGameboard(int, Gameboard &);                                              // Methode, welche ueberprueft, ob ein Spieler ueber das Spielbrett hinaus gegangen ist.
+    int determineIndexOfStartingField(Player &, Gameboard &);                           // Methode, welche den Index des aktuellen Feldes einer Figur, der dann als Startfeld verwendet wird, bestimmt.
 
     // Abfragen
-    bool beyondTargetField(int, int, Player &, Gameboard &); // Ueberprueft, ob ein Spieler ueber seinen eigenen Zielfelder hinaus gehen wuerde und gibt dies als Wahrheitswert zurueck.
-    bool FigurenBewegbar(int, Player &, Gameboard &);        // Ueberprueft, ob ein Spieler mit der aktuell gewuerfelten Zahl bewegbare Figuren hat
+    bool beyondTargetField(int, int, Player &, Gameboard &); // Methode, die ueberprueft, ob eine Spielfigur ueber ihre Zielfelder hinaus gelaufen ist.
+    bool tokenMovable(int, Player &, Gameboard &);           // Methode, die ueberprueft, ob ein Spieler mit der aktuell gewuerfelten Zahl bewegbare Figuren hat
+    bool isTargetField(int, Player &, Gameboard &);          // Methode, welche untersucht, ob das Feld an FieldIndex ein Zielfeld vom Player-Objekt ist.
 };

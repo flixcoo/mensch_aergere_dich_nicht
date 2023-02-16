@@ -35,20 +35,20 @@ std::array<int, 4> player4_distance = {0, 0, 0, 0};
 
 int main()
 {
-    Spielablauf MenschAergeredichnicht; // Initialisiert das Gameplay-Objekt "Mensch_Aergere_dich_nicht".
-    Gameboard Board;                    // Initialisiert das Gameboard-Objekt "Board".
+    Gameplay MenschAergeredichnicht; // Initialisiert das Gameplay-Objekt "MenschAergeredichnicht".
+    Gameboard Board;                 // Initialisiert das Gameboard-Objekt "Board".
 
-    System::initialiseGame(); // Fuehrt die Methode "InitialisiereSpiel" des Spielfeldobjekt "Board" aus.
+    System::initialiseGame(); // Fuehrt die Methode "InitialisiereSpiel" des Spielfeldobjekt "Board" aus (Konsolenausgabe).
 
     Player player1(player1_identifier, player1_startingField, player1_targetFields, player1_currentField, player1_distance); // Erschafft ein Spielerobjekt "player1" mit den gegebenen Startwerten.
     Player player2(player2_identifier, player2_startingField, player2_targetFields, player2_currentField, player2_distance); // Erschafft ein Spielerobjekt "player2" mit den gegebenen Startwerten.
     Player player3(player3_identifier, player3_startingField, player3_targetFields, player3_currentField, player3_distance); // Erschafft ein Spielerobjekt "player3" mit den gegebenen Startwerten.
     Player player4(player4_identifier, player4_startingField, player4_targetFields, player4_currentField, player4_distance); // Erschafft ein Spielerobjekt "player4" mit den gegebenen Startwerten.
 
-    while (!(MenschAergeredichnicht.endOfGame(player1, player2, player3, player4)))
+    while (!(MenschAergeredichnicht.endOfGame(player1, player2, player3, player4))) // Wird ausgefuehrt, solange kein Spieler alle Figuren im Ziel hat.
     {
-        MenschAergeredichnicht.playOneRound(player1, player2, player3, player4, Board);
+        MenschAergeredichnicht.playOneRound(player1, player2, player3, player4, Board); // Spiele eine Runde Mensch Aergere Dich Nicht.
     }
-    std::cout << "Das Spiel ist zu Ende!" << std::endl
-              << std::endl;
+    std::cout << "Das Spiel ist zu Ende! Spieler " << MenschAergeredichnicht.winner(player1, player2, player3, player4) << " hat gewonnen." << std::endl
+              << std::endl; // Konsolenausgabe: Gewinner wird ausgeben.
 }

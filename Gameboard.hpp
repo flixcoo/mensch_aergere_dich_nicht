@@ -7,7 +7,6 @@
  * @brief Dies ist die Klasse welche das Spielfeld darstellt.
  * Die Klasse PlayingField hat als einziges Attribut das Spielfeld, welches als String-Vektor hinterlegt ist.
  * Es beinhaltet alle Felder, welche von Spielfiguren abgegangen werden koennen, was die "Lager"-Felder ausschliesst
- *
  * @author Felix Kirchner
  * @see Spielablauf
  */
@@ -18,9 +17,9 @@ private:
 
 public:
     // Objektmanagement
-    Gameboard();  // Konstruktor der Klasse PlayingField
-    ~Gameboard(); // Destruktor der Klasse PlayingField
+    Gameboard();  // Konstruktor der Klasse "Gameboard".
+    ~Gameboard(); // Destruktor der Klasse "Gameboard".
 
     // Getter der Klasse
-    std::array<std::string, 56> get_board();
+    std::array<std::string, 56> get_board(); // Getter des Attributes "board".
 };

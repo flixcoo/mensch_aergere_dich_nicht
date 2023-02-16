@@ -11,6 +11,6 @@
 class System
 {
 public:
-    static int randomizer(int);   // Zufallsgenerator, welcher eine Zufallszahl zwischen eins und einem selbstgewaehlten Wert zurueckgibt.
-    static void initialiseGame(); // Konsolenausgabe zum Starten des Spiels.
+    static int randomizer(int);   // Funktion zum generieren einer Zufallszahl.
+    static void initialiseGame(); // Funktion zum Ausgeben eines Startbildschirmes in der Konsole.
 };
