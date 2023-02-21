@@ -584,7 +584,7 @@ bool Gameplay::endOfGame(Player &playerObj1, Player &playerObj2, Player &playerO
  * @brief Methode, die das "identifier"-Attribut des Spielers zurueckgibt, der gewonnen hat.
  * Es wird geprueft, ob fuer jeweils Spieler 1 - 4 alle Figuren im Ziel sind.
  * Wenn das der Fall ist, wird fuer den jeweiligen Spieler das "identifier"-Attribut zurueckgegeben.
- * Wird kein Gewinner gefunden, wird 404 zurueckgegeben
+ * Wird kein Gewinner gefunden, wird 404 zurueckgegeben.
  * @param playerObj1 Player-Objekt des ersten Spielers.
  * @param playerObj2 Player-Objekt des zweiten Spielers.
  * @param playerObj3 Player-Objekt des dritten Spielers.
@@ -624,7 +624,7 @@ int Gameplay::winner(Player &playerObj1, Player &playerObj2, Player &playerObj3,
  * @param gameboardObj Gameboard-Objekt des Spielfeldes Spielers.
  * @see get_board, get_startingField
  * @return Der Index auf dem Gameboard-Objekt, an dem sich das Startfeld befindet bzw. 0, falls er nicht gefunden werden konnte.
- * @pre Das Startfeld muss sich auf dem "board"-Attribut des "Gameboard-Objektes" befinden
+ * @pre Das Startfeld muss sich auf dem "board"-Attribut des "Gameboard-Objektes" befinden.
  * @post Es gibt das Startfeld des Spielers auf dem Spielfeld.
  * @since Version 1.2
  * @author Felix Kirchner
@@ -644,12 +644,13 @@ int Gameplay::determineIndexOfStartingField(Player &playerObj, Gameboard &gamebo
 /**
  * @brief Methode, welche untersucht, ob das Feld an FieldIndex ein Zielfeld vom Player-Objekt ist.
  * Es wird durch die Zielfelder gegangen und fuer jedes Zielfeld ueberprueft ob das Feld an der Stelle FeldIndex im Gameboard-Objekt ein Zielfeld vom Spieler-Objekt ist.
- * Wenn eines der Zielfelder an der Stelle FieldIndex erkannt wird, wird true zurueckgegeben. Wenn das Feld an der Stelle FieldIndex keines der Zielfelder ist, wird false zurueckgegeben.
+ * Wenn eines der Zielfelder an der Stelle FieldIndex erkannt wird, wird true zurueckgegeben.
+ * Wenn das Feld an der Stelle FieldIndex keines der Zielfelder ist, wird false zurueckgegeben.
  * @param FieldIndex Integer, der den Index des untersuchten Feldes darstellt.
  * @param playerObj Player-Objekt des Spielers, auf dessen Zielfelder untersucht wird.
  * @param gameboardObj Gameboard-Objekt des Spielfeldes Spielers.
  * @see get_targetFields, get_board
- * @return Wahrheitswert, der fuer den Spieler wahr ausgibt, wenn das Feld an der Stell FieldIndex eines der Zielfelder des Spielers ist
+ * @return Wahrheitswert, der fuer den Spieler wahr ausgibt, wenn das Feld an der Stell FieldIndex eines der Zielfelder des Spielers ist.
  * @pre Das Player-Objekt muss Zielfelder enthalten.
  * @since Version 1.6
  * @author Felix Kirchner

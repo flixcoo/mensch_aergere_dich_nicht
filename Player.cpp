@@ -25,7 +25,6 @@ Player::Player(int identifier, std::string startingField, std::array<std::string
 {
     this->identifier = identifier;
     Storage = "X";
-
     this->startingField = startingField;
     this->currentField = currentField;
     this->distance = distance;
