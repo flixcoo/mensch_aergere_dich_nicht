@@ -19,7 +19,7 @@
  * @param playerObj4 Player-Objekt des Spielers, der als vierter am Zug ist.
  * @param gameboardObj Gameboard-Objekt des Spielfeldes.
  * @see printBoard, playersTurn
- * @return Die Methode hat keinen Rueckggabewert.
+ * @return Die Methode hat keinen Rueckgabewert.
  * @pre Es muss vier Player-Objekte und ein Gameboard-Objekt geben.
  * @since Version 1.2
  * @author Felix Kirchner
@@ -555,15 +555,15 @@ int Gameplay::determineStartingFieldIndex(int TokenIndex, Player &playerObj, Gam
     return 404;
 }
 /**
- * @brief Methode, die fuer alle vier Spieler ueberorueft, ob mindestens einer von ihnen alle Spielfiguren in den Zielfeldern hat.
+ * @brief Methode, die fuer alle vier Spieler ueberprueft, ob mindestens einer von ihnen alle Spielfiguren in den Zielfeldern hat.
  * Fuer alle vier Spieler wird abgefragt, ob Sie alle Spielfiguren in den Zielfeldern haben.
- * Wenn mindestens einer diese Bedingung erfuellt ist, wird true zurueckgegeben, ansonsten falls.
+ * Wenn mindestens einer diese Bedingung erfuellt ist, wird true zurueckgegeben, ansonsten false.
  * @param playerObj1 Player-Objekt des ersten Spielers.
  * @param playerObj2 Player-Objekt des zweiten Spielers.
  * @param playerObj3 Player-Objekt des dritten Spielers.
  * @param playerObj4 Player-Objekt des vierten Spielers.
  * @see allTokenInTargetField
- * @return Wahrheitswert, ueber die Aussage, ob einer der Spieler alle Spielfiguren im Ziel hat.
+ * @return Wahrheitswert, ueber die Aussage, ob mindestens einer der Spieler alle Spielfiguren im Ziel hat.
  * @pre Es muss vier Spielerobjekte geben.
  * @since Version 1.5
  * @author Felix Kirchner
@@ -668,7 +668,7 @@ bool Gameplay::isTargetField(int FieldIndex, Player &playerObj, Gameboard &gameb
 
 /**
  * @brief Methode, welche das Spielfeld mit den aktuellen Positionen der Spielfiguren in der Konsole ausgibt.
- * Die Methode gibt in der Konsole fÅr jedes Feld auf dem Gameboard-Array jeweils die dort sich befindlichen Spieler aus.
+ * Die Methode gibt in der Konsole fuer jedes Feld auf dem Gameboard-Array jeweils die dort sich befindlichen Spieler aus.
  * Normale Felder werden dabei in runde Klammern gesetzt, Zielfelder in geschweifte Klammern.
  * Vor dem Startfeld eines Spielers wird das Lager mit den sich dort befindlichen Figuren ausgegeben.
  * @param playerObj1 Player-Objekt des ersten Spielers.
@@ -679,7 +679,7 @@ bool Gameplay::isTargetField(int FieldIndex, Player &playerObj, Gameboard &gameb
  * @see determineIndexOfStartingField, isTargetField, get_currentField, get_board
  * @return Die Methode hat keinen Rueckggabewert.
  * @pre Es muss vier Player-Objekte und ein Gameboard-Objekt geben
- * @post Bedingungen, die nach dem Aufruf der Funktion erfÅllt sind
+ * @post Bedingungen, die nach dem Aufruf der Funktion erfùllt sind
  * @since Version 1.6
  * @author Felix Kirchner
  */
