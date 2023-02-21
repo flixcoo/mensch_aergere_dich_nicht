@@ -679,7 +679,6 @@ bool Gameplay::isTargetField(int FieldIndex, Player &playerObj, Gameboard &gameb
  * @see determineIndexOfStartingField, isTargetField, get_currentField, get_board
  * @return Die Methode hat keinen Rueckggabewert.
  * @pre Es muss vier Player-Objekte und ein Gameboard-Objekt geben
- * @post Bedingungen, die nach dem Aufruf der Funktion erfùllt sind
  * @since Version 1.6
  * @author Felix Kirchner
  */
