@@ -3,7 +3,7 @@
 
 /**
  * @brief Dies ist die Klasse welche das Spielfeld darstellt.
- * Die Klasse PlayingField hat als einziges Attribut das Spielfeld, welches als String-Vektor hinterlegt ist.
+ * Die Klasse Gameboard hat als einziges Attribut das Spielfeld ("board"), welches als String-Vektor hinterlegt ist.
  * Es beinhaltet alle Felder, welche von Spielfiguren abgegangen werden koennen, was die "Lager"-Felder ausschliesst
  * @author Felix Kirchner
  * @see Spielablauf

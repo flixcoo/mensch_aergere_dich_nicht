@@ -4,7 +4,7 @@ class Gameboard; // Vorher Bekanntmachung fuer Klasse Spielablauf
 class Player;    // Vorher Bekanntmachung fuer Klasse Spielablauf
 
 /**
- * @brief Die Klasse regelt den Ablauf des Spiels
+ * @brief Die Klasse regelt den Ablauf des Spiels.
  * Die Klasse hat nur Methoden, welche verschiedenste Spielverlaufe abdecken und ggf. Attribute der Spielerklasse korrigieren.
  * @author Felix Kirchner
  * @see Spieler
