@@ -1,6 +1,6 @@
 # Mensch Ärger Dich Nicht
 
-Dies ist mein Abschlussprojekt in meinem ersten Semester an der HTWK Leipzig im Modul "Grundlagen der Programmierung". Es handelt sich um ein über die Konsole spielbares "Mensch Ärger Dich Nicht"-Spiel geschrieben in C++.
+Dies ist mein Abschlussprojekt in meinem ersten Semester an der HTWK Leipzig im Modul _Grundlagen der Programmierung_. Es handelt sich um ein über die Konsole spielbares "Mensch Ärger Dich Nicht"-Spiel geschrieben in C++.
 
 ## Funktionsweise
 
